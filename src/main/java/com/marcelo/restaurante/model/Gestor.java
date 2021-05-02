@@ -17,7 +17,7 @@ public class Gestor {
 	private String nomeEstabelecimento;
 	
     @OneToOne
-    @JoinColumn(name = "usuario_id")
+    @JoinColumn(name = "usuario_email")
     private Usuario usuario;
 
 	public Usuario getUsuario() {
