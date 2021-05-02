@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity(name = "gestor")
 public class Gestor {
@@ -14,9 +16,17 @@ public class Gestor {
 
 	private String nomeEstabelecimento;
 	
-	private String email;
-	
-	private String senha;
+    @OneToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
 	public String getNomeEstabelecimento() {
 		return nomeEstabelecimento;
@@ -24,22 +34,6 @@ public class Gestor {
 
 	public void setNomeEstabelecimento(String nomeEstabelecimento) {
 		this.nomeEstabelecimento = nomeEstabelecimento;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
 	}
 
 }
