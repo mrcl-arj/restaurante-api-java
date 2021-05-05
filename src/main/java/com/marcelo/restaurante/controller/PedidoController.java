@@ -112,12 +112,12 @@ public class PedidoController {
 		}
     }
     
-    @PostMapping(value = "/pedido/atualizarStatus/")
+    @PostMapping(value = "/pedido/atualizarStatus")
     public ResponseEntity<Pedido> atualizarStatus(@RequestBody JsonNode json) {
     	try {
-    		long pedido_id = json.get("pedido_id").asLong();
+    		long id = json.get("pedido_id").asLong();
     		String status = json.get("status").toString();
-    		Optional<Pedido> pedidoAux = pedidoRepository.findById(pedido_id);
+    		Optional<Pedido> pedidoAux = pedidoRepository.findById(id);
     	    if(pedidoAux.isPresent()){
     	    	Pedido pedido = pedidoAux.get();
     	    	pedido.setStatus(StatusPedido.valueOf(status));
