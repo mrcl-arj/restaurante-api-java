@@ -4,17 +4,17 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.marcelo.restaurante.enums.StatusPedido;
 import com.marcelo.restaurante.model.Item;
 import com.marcelo.restaurante.model.Pedido;
@@ -61,7 +61,6 @@ public class PedidoController {
         		Item item = new Item();
         		item.setProduto(produto);
         		item.setQuantidade(produtoJson.get("quantidade").asLong());
-        		//itens.add(itemRepository.save(item));
         		itens.add(item);
         		valorTotal = valorTotal.add(produto.getPreco());
         	}
@@ -78,23 +77,58 @@ public class PedidoController {
     	});
 
     	return new ResponseEntity<>(pedidoAux, HttpStatus.OK);
-
-//    	produtos.forEach(produtoJson->{
-//        	long produto_id = produtoJson.get("produto_id").asLong();
-//        	Optional<Produto> produtoAux = pedidoRepository.findById(produto_id);
-//        	if(!produtoAux.isPresent()) {
-//        		return new ResponseEntity<>("ERROR", HttpStatus.NO_CONTENT);
-//        	}else {
-//        		Produto produto = produtoAux.get();
-//        		item.setProduto(produto);
-//        		item.setQuantidade(json.get("quantidade").asLong());
-//        		pedido.getItens().add(item) ;
-//        		valorTotal = valorTotal.add(produto.getPreco());
-//        	}
-//        	pedido.setValor(valorTotal);
-//        	pedido.setStatus(StatusPedido.AGUARDANDO_CONFIRMACAO);
-//        	return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
-//    	});
+    }
+    
+    @GetMapping(value = "/pedido/status/{id}")
+    public ResponseEntity<Pedido> statusPedido(@PathVariable Long id) {
+    	try {
+    		Optional<Pedido> pedidoAux = pedidoRepository.findById(id);
+    	    if(pedidoAux.isPresent()){
+    	    	Pedido pedido = pedidoAux.get();
+    	        return new ResponseEntity<Pedido>(pedido, HttpStatus.OK);
+    	     } else {
+    	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    	     }
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+    }
+    
+    @PostMapping(value = "/pedido/finalizados")
+    public ResponseEntity<String> consultarFinalizados() {
+    	try {
+    		List<Pedido> pedidos = pedidoRepository.pedidosFinalizados();
+    		pedidos.forEach(pedido->{
+    			System.out.println(pedido);
+    		});
+//    	    if(pedidoAux.isPresent()){
+//    	    	Pedido pedido = pedidoAux.get();
+    	        return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+//    	     } else {
+//    	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//    	     }
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+    }
+    
+    @PostMapping(value = "/pedido/atualizarStatus/")
+    public ResponseEntity<Pedido> atualizarStatus(@RequestBody JsonNode json) {
+    	try {
+    		long pedido_id = json.get("pedido_id").asLong();
+    		String status = json.get("status").toString();
+    		Optional<Pedido> pedidoAux = pedidoRepository.findById(pedido_id);
+    	    if(pedidoAux.isPresent()){
+    	    	Pedido pedido = pedidoAux.get();
+    	    	pedido.setStatus(StatusPedido.valueOf(status));
+    	    	pedidoRepository.save(pedido);
+    	        return new ResponseEntity<Pedido>(pedido, HttpStatus.OK);
+    	     } else {
+    	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    	     }
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
     }
 
 }
