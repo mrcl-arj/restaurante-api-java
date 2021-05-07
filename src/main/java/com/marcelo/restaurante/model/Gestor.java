@@ -17,14 +17,14 @@ public class Gestor {
 	private String nomeEstabelecimento;
 	
     @OneToOne
-    @JoinColumn(name = "usuario_email")
-    private Usuario usuario;
+    @JoinColumn(name = "usuario_id")
+    private Usuario2 usuario;
 
-	public Usuario getUsuario() {
+	public Usuario2 getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(Usuario2 usuario) {
 		this.usuario = usuario;
 	}
 

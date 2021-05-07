@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.marcelo.restaurante.model.Cliente;
-import com.marcelo.restaurante.model.Usuario;
+import com.marcelo.restaurante.model.Usuario2;
 import com.marcelo.restaurante.repository.ClienteRepository;
-import com.marcelo.restaurante.repository.UsuarioRepository;
+import com.marcelo.restaurante.repository.Usuario2Repository;
 
 @RestController
 public class ClienteController {
@@ -19,12 +19,12 @@ public class ClienteController {
     private ClienteRepository clienteRepository;
 	
 	@Autowired
-    private UsuarioRepository usuarioRepository;
+    private Usuario2Repository usuarioRepository;
 	
     @PostMapping(value = "/cliente/cadastrar")
     public ResponseEntity<String> cadastrar(@RequestBody Cliente cliente) {
     	try {
-    		Usuario usuario = usuarioRepository.save(cliente.getUsuario());
+    		Usuario2 usuario = usuarioRepository.save(cliente.getUsuario());
     		cliente.setUsuario(usuario);
     		clienteRepository.save(cliente);
     		

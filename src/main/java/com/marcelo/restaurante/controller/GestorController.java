@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.marcelo.restaurante.model.Gestor;
-import com.marcelo.restaurante.model.Usuario;
+import com.marcelo.restaurante.model.Usuario2;
 import com.marcelo.restaurante.repository.GestorRepository;
-import com.marcelo.restaurante.repository.UsuarioRepository;
+import com.marcelo.restaurante.repository.Usuario2Repository;
 
 @RestController
 public class GestorController {
@@ -19,12 +19,12 @@ public class GestorController {
     private GestorRepository gestorRepository;
 	
 	@Autowired
-    private UsuarioRepository usuarioRepository;
+    private Usuario2Repository usuarioRepository;
 	
     @PostMapping(value = "/gestor/cadastrar")
     public ResponseEntity<String> cadastrar(@RequestBody Gestor gestor) {
     	try {
-    		Usuario usuario = usuarioRepository.save(gestor.getUsuario());
+    		Usuario2 usuario = usuarioRepository.save(gestor.getUsuario());
     		gestor.setUsuario(usuario);
     		gestorRepository.save(gestor);
     		

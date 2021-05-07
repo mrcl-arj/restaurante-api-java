@@ -24,7 +24,7 @@ public class Cliente {
 	
     @ManyToOne
     @JoinColumn(name = "usuario_email")
-    private Usuario usuario;
+    private Usuario2 usuario;
 
 	public String getNome() {
 		return nome;
@@ -50,11 +50,11 @@ public class Cliente {
 		this.nascimento = nascimento;
 	}
 
-	public Usuario getUsuario() {
+	public Usuario2 getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(Usuario2 usuario) {
 		this.usuario = usuario;
 	}
 
