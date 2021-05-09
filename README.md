@@ -19,6 +19,7 @@
  - mvn clean install
  - mvn spring-boot:run
  - atualize o arquivo application.properties com suas informaçoes do banco de dados
+ - OBS.: Ao criar a instancia de banco, inserir na tabela perfis (ROLE_GESTOR, ROLE_CLIENTE).
 
 ### Documentação
  - O projeto conta com uma collection Postman incluindo descrição e exemplos de uso dos endpoints.
