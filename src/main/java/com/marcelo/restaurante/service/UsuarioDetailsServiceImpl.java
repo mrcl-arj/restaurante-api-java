@@ -15,13 +15,13 @@ import java.util.ArrayList;
 public class UsuarioDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    UsuarioRepository jwtUserRepository;
+    UsuarioRepository usuarioRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Usuario jwtUser = jwtUserRepository.findUserByEmail(email);
+        Usuario jwtUser = usuarioRepository.findUserByEmail(email);
         if (jwtUser == null) {
-            throw new UsernameNotFoundException("email Not found" + email);
+            throw new UsernameNotFoundException("Email não encontrado: " + email);
         }
         return new User(jwtUser.getEmail(), jwtUser.getSenha(), new ArrayList<>());
     }

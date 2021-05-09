@@ -23,8 +23,8 @@ public class Cliente {
 	private LocalDate nascimento;
 	
     @ManyToOne
-    @JoinColumn(name = "usuario_email")
-    private Usuario2 usuario;
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 
 	public String getNome() {
 		return nome;
@@ -50,11 +50,11 @@ public class Cliente {
 		this.nascimento = nascimento;
 	}
 
-	public Usuario2 getUsuario() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario2 usuario) {
+	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 

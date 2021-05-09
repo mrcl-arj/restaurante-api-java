@@ -36,6 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         security.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/authenticate", "/signin", "/signup").permitAll()
+                .antMatchers("/", "/cardapio", "/gestor/cadastrar", "/cliente/cadastrar").permitAll()
                 .anyRequest().authenticated().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         security.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }

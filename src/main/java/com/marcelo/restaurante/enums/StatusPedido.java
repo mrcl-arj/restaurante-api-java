@@ -2,7 +2,7 @@ package com.marcelo.restaurante.enums;
 
 public enum StatusPedido {
 
-	EM_PRODUCAO("Em produção"), CANCELADO("Cancelado"), AGUARDANDO_CONFIRMACAO("Aguandando confirmaçao"), FINALIZADO("Finalizado");
+	AGUARDANDO_CONFIRMACAO("Aguandando confirmaçao"), EM_PRODUCAO("Em produção"), FINALIZADO("Finalizado"), CANCELADO("Cancelado");
 
 	private String value;
 
