@@ -36,6 +36,8 @@ public class PedidoService {
 	@Autowired
     private ItemRepository itemRepository;
 	
+	@Autowired
+	private UsuarioRepository usuarioRepository;
 
 	
 	public ResultadoRequisicao solicitar(List<ItemDTO> itensDTO) {
@@ -61,7 +63,7 @@ public class PedidoService {
         	}
     	}
     	
-    	pedido.setUsuario(Util.buscaUsuarioLogado());
+    	pedido.setUsuario(usuarioRepository.findByEmail(Util.buscaUsuarioLogado()));
     	pedido.setItens(itens);
     	pedido.setValor(valorTotal);
     	pedido.setStatus(StatusPedido.AGUARDANDO_CONFIRMACAO);
@@ -169,7 +171,7 @@ public class PedidoService {
     			}
     	     } else {
          		resultado.setStatus(HttpStatus.NOT_FOUND);
-         		resultado.setMensagem("Produto não encontrado!");
+         		resultado.setMensagem("Pedido não encontrado!");
          		return resultado;
     	     }
 		} catch (Exception e) {
@@ -177,6 +179,46 @@ public class PedidoService {
     		resultado.setMensagem("Erro ao realizar açao!");
 			return resultado;
 		}
+	}
+	
+	public ResultadoRequisicao cancelarPedido(Long id) {
+		ResultadoRequisicao resultado = new ResultadoRequisicao();
+		
+    	try {
+    		Optional<Pedido> pedidoAux = pedidoRepository.findById(id);
+    	    if(pedidoAux.isPresent()){
+    	    	Pedido pedido = pedidoAux.get();
+    	    	if(pedido.getStatus().equals(StatusPedido.AGUARDANDO_CONFIRMACAO)) {
+        	    	try {
+            	    	
+            	    	pedido.setStatus(StatusPedido.CANCELADO);
+        	    		Pedido p = pedidoRepository.save(pedido);
+        	    		resultado.setStatus(HttpStatus.OK);
+            			resultado.setMensagem("Pedido "+p.getStatus().toString());
+            			return resultado;	
+        			} catch (Exception e) {
+        				e.printStackTrace();
+        	    		resultado.setStatus(HttpStatus.BAD_REQUEST);
+        	    		resultado.setMensagem("Erro ao atualizar status do pedido!");
+        				return resultado;
+        			}
+    	    	}else {
+    	    		resultado.setStatus(HttpStatus.NOT_ACCEPTABLE);
+    	    		resultado.setMensagem("Pedido ja esta em produçao, cancelado ou finalizado!");
+    				return resultado;
+    	    	}
+
+    	     } else {
+         		resultado.setStatus(HttpStatus.NOT_FOUND);
+         		resultado.setMensagem("Pedido não encontrado!");
+         		return resultado;
+    	     }
+		} catch (Exception e) {
+    		resultado.setStatus(HttpStatus.BAD_REQUEST);
+    		resultado.setMensagem("Erro ao realizar açao!");
+			return resultado;
+		}
+		
 	}
 
 }

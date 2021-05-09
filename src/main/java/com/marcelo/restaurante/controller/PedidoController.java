@@ -46,5 +46,11 @@ public class PedidoController {
 		ResultadoRequisicao resultado = pedidoService.atualizarStatus(id, status);
 		return new ResponseEntity<>(resultado.getMensagem(), resultado.getStatus());
     }
+    
+    @PutMapping(value = "/pedido/cancelarPedido/{id}")
+    public ResponseEntity<?> cancelarPedido(@PathVariable Long id) {
+		ResultadoRequisicao resultado = pedidoService.cancelarPedido(id);
+		return new ResponseEntity<>(resultado.getMensagem(), resultado.getStatus());
+    }
 
 }

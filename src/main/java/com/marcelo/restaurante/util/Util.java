@@ -14,17 +14,14 @@ import com.marcelo.restaurante.repository.UsuarioRepository;
 @Service
 public class Util {
 	
-	@Autowired
-	private static UsuarioRepository usuarioRepository;
-	
     public static String formatarBigDecimalParaMoeda(BigDecimal valor) {
         DecimalFormat fmt = new DecimalFormat("#,###,##0.00");
         return fmt.format(valor);
     }
     
-    public static Usuario buscaUsuarioLogado() {
+    public static String buscaUsuarioLogado() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         
-        return usuarioRepository.findByEmail(authentication.getName());
+        return authentication.getName();
     }
 }
