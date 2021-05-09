@@ -9,7 +9,7 @@
  - JWT 0.11.2
  - PostgreSql 12
 
-### Funcionalidades
+### Funcionalidades:
 
 - [x] Cadastro de gestor
 - [x] Cadastro de cliente
@@ -20,3 +20,6 @@
  - mvn clean install
  - mvn spring-boot:run
  - atualize o arquivo application.properties com suas informaçoes do banco de dados
+
+### Versão Online
+ - https://restaurante-api-teste.herokuapp.com/
