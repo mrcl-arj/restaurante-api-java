@@ -1,6 +1,6 @@
 package com.marcelo.restaurante.DTO;
 
-public class AuthenticationResponse {
+public class AutenticacaoDTO {
 
     private String jwt;
 
@@ -12,7 +12,7 @@ public class AuthenticationResponse {
         this.jwt = jwt;
     }
 
-    public AuthenticationResponse(String jwt) {
+    public AutenticacaoDTO(String jwt) {
         this.jwt = jwt;
     }
 }

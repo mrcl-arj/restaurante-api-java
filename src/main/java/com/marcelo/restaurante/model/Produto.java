@@ -30,6 +30,7 @@ public class Produto {
     
     private Long minDeProducao;
 	
+    @Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private CategoriaProduto categoria;
 
