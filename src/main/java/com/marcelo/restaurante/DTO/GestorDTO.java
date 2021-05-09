@@ -7,6 +7,8 @@ public class GestorDTO {
     private String email;
 
     private String senha;
+    
+    private String perfil;
 
 	public String getNomeEstabelecimento() {
 		return nomeEstabelecimento;
@@ -30,6 +32,14 @@ public class GestorDTO {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	
+	public String getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(String perfil) {
+		this.perfil = perfil;
 	}
 
 

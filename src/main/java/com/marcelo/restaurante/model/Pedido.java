@@ -10,6 +10,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -30,6 +32,10 @@ public class Pedido {
     
     @Enumerated(EnumType.STRING)
     private StatusPedido status;
+    
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
     
     public Long getId() {
 		return id;
@@ -57,6 +63,14 @@ public class Pedido {
 
 	public void setStatus(StatusPedido status) {
 		this.status = status;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	

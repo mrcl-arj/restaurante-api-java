@@ -20,6 +20,7 @@ import com.marcelo.restaurante.model.Produto;
 import com.marcelo.restaurante.repository.ItemRepository;
 import com.marcelo.restaurante.repository.PedidoRepository;
 import com.marcelo.restaurante.repository.ProdutoRepository;
+import com.marcelo.restaurante.repository.UsuarioRepository;
 import com.marcelo.restaurante.util.ResultadoRequisicao;
 import com.marcelo.restaurante.util.Util;
 
@@ -34,6 +35,8 @@ public class PedidoService {
 	
 	@Autowired
     private ItemRepository itemRepository;
+	
+
 	
 	public ResultadoRequisicao solicitar(List<ItemDTO> itensDTO) {
 		ResultadoRequisicao resultado = new ResultadoRequisicao();
@@ -58,6 +61,7 @@ public class PedidoService {
         	}
     	}
     	
+    	pedido.setUsuario(Util.buscaUsuarioLogado());
     	pedido.setItens(itens);
     	pedido.setValor(valorTotal);
     	pedido.setStatus(StatusPedido.AGUARDANDO_CONFIRMACAO);

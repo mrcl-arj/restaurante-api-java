@@ -3,6 +3,7 @@ package com.marcelo.restaurante.DTO;
 public class LoginDTO {
     private String email;
     private String senha;
+    private String perfil;
 
     public String getEmail() {
         return email;
@@ -19,4 +20,12 @@ public class LoginDTO {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+	public String getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(String perfil) {
+		this.perfil = perfil;
+	}
 }

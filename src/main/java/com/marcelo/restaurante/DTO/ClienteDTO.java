@@ -13,6 +13,8 @@ public class ClienteDTO {
     private String email;
 
     private String senha;
+    
+    private String perfil;
 
 	public String getNome() {
 		return nome;
@@ -52,6 +54,14 @@ public class ClienteDTO {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public String getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(String perfil) {
+		this.perfil = perfil;
 	}
 
 }

@@ -1,14 +1,21 @@
 package com.marcelo.restaurante.service;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.marcelo.restaurante.DTO.ClienteDTO;
+import com.marcelo.restaurante.enums.PerfilNome;
 import com.marcelo.restaurante.model.Cliente;
+import com.marcelo.restaurante.model.Perfil;
 import com.marcelo.restaurante.model.Usuario;
 import com.marcelo.restaurante.repository.ClienteRepository;
+import com.marcelo.restaurante.repository.PerfilRepository;
 import com.marcelo.restaurante.repository.UsuarioRepository;
 import com.marcelo.restaurante.util.ResultadoRequisicao;
 
@@ -22,6 +29,9 @@ public class ClienteService {
 	
     @Autowired
     private UsuarioRepository usuarioRepository;
+    
+    @Autowired
+    private PerfilRepository perfilRepository;
 
 	public ResultadoRequisicao registrar(ClienteDTO clienteDTO) {
 		ResultadoRequisicao resultado = new ResultadoRequisicao();
@@ -35,9 +45,15 @@ public class ClienteService {
 				return resultado;
 		    }
 		    
+		    Set<Perfil> perfis = new HashSet<>();
+		    Perfil perfil = perfilRepository.findByNome(PerfilNome.valueOf(clienteDTO.getPerfil()) ).get();
+		    perfis.add(perfil);
+		    
 			usuario.setEmail(clienteDTO.getEmail());
 			usuario.setSenha(senhaEncoder.encode(clienteDTO.getSenha()));
+			usuario.setPerfis(perfis);
 			usuario = usuarioRepository.save(usuario);
+			
 			
 			cliente.setUsuario(usuario);
 			cliente.setNome(clienteDTO.getNome());

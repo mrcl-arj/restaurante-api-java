@@ -35,7 +35,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity security) throws Exception {
         security.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/login", "/cardapio", "/gestor/cadastrar", "/cliente/cadastrar").permitAll()
+                .antMatchers("/", "/login", "/gestor/cadastrar", "/cliente/cadastrar").permitAll()
+                //.antMatchers("/cardapio").permitAll()
+                .antMatchers("/produto/editar/{id}").hasAnyAuthority("GESTOR")
                 .anyRequest().authenticated().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         security.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }

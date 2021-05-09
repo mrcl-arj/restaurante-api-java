@@ -2,6 +2,7 @@ package com.marcelo.restaurante.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -50,6 +51,7 @@ public class LoginController {
                 new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getSenha())
         );
 
+        SecurityContextHolder.getContext().setAuthentication(authenticate);
         UserDetails userDetails = usuarioDetailsService.loadUserByUsername(loginDTO.getEmail());
 
         final String jwt = jwtUtil.generateToken(userDetails);

@@ -1,5 +1,6 @@
 package com.marcelo.restaurante.service;
 
+import com.marcelo.restaurante.DTO.UsuarioDTO;
 import com.marcelo.restaurante.model.Usuario;
 import com.marcelo.restaurante.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,11 @@ public class UsuarioDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Usuario jwtUser = usuarioRepository.findUserByEmail(email);
-        if (jwtUser == null) {
+        Usuario usuario = usuarioRepository.findUserByEmail(email);
+        if (usuario == null) {
             throw new UsernameNotFoundException("Email não encontrado: " + email);
         }
-        return new User(jwtUser.getEmail(), jwtUser.getSenha(), new ArrayList<>());
+        //return new User(usuario.getEmail(), usuario.getSenha(), true, true, true, true, usuario.getAuthorities());
+        return UsuarioDTO.build(usuario);
     }
 }
