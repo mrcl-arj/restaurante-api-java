@@ -1,0 +1,351 @@
+{
+	"info": {
+		"_postman_id": "9b600190-ec8c-4769-8ad1-76e9e69e5b6d",
+		"name": "Restaurante API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "gestor",
+			"item": [
+				{
+					"name": "cadastrar gestor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nomeEstabelecimento\":\"restaurante teste\",\r\n    \"email\":\"teste@restaurante.com\",  \r\n    \"senha\":123,\r\n    \"perfil\": \"ROLE_GESTOR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/gestor/cadastrar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gestor",
+								"cadastrar"
+							]
+						},
+						"description": "Endpoint responsavel pelo cadastro de gestor do restaurante; Campos obrigatorios: nome, email e senha."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cliente",
+			"item": [
+				{
+					"name": "cadastrar cliente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"marcelo\",\r\n    \"telefone\": \"86998184888\",\r\n    \"nascimento\": \"1994-08-08\",        \r\n    \"email\":\"mrcl.arj2@gmail.com\",  \r\n    \"senha\":123,\r\n    \"perfil\": \"ROLE_CLIENTE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/cliente/cadastrar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cliente",
+								"cadastrar"
+							]
+						},
+						"description": "Endpoint responsavel pelo cadastro de cliente; Campos obrigatorios: nome, telefone, data de nascimento, email e senha."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "produto",
+			"item": [
+				{
+					"name": "cadastrar produto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0ZTJAdGVzdGUuY29tIiwiaWF0IjoxNjIwNTMxOTc5LCJleHAiOjE2MjA1MzI1Nzl9.VlGbnRWSUEQvPWV5be_WIz9lA9j8U_w2GAXWYU-2rFY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"pizza 3\",\r\n    \"preco\": 60.0,\r\n    \"quantidadeEstoque\": 10, \r\n    \"minDeProducao\": 30,\r\n    \"categoria\": \"COMIDA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/produto/cadastrar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"produto",
+								"cadastrar"
+							]
+						},
+						"description": "Endpoint responsavel por cadastro de produtos. Campos obrigatorios: nome, preço e categoria."
+					},
+					"response": []
+				},
+				{
+					"name": "editar produto",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0ZTJAdGVzdGUuY29tIiwiaWF0IjoxNjIwNTMyNDY3LCJleHAiOjE2MjA1MzMwNjd9.yT1dzKkjJQE056WK-G7xSqAdPPMTw37MZShZ3rtjHAo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"pizza frango\",\r\n    \"preco\": 50.0,\r\n    \"quantidadeEstoque\": 3, \r\n    \"minDeProducao\": 30,\r\n    \"categoria\": \"BEBIDA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/produto/editar/4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"produto",
+								"editar",
+								"4"
+							]
+						},
+						"description": "Endpoint responsavel pela edição de produtos."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "pedido",
+			"item": [
+				{
+					"name": "solicitar pedido",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0ZTJAdGVzdGUuY29tIiwiaWF0IjoxNjIwNTA2NzAxLCJleHAiOjE2MjA1MDczMDF9.DBJo1luGbCPfPx--5sOY_dOQbIKv5V9Inxv2YcBozSk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n        {        \r\n            \"produtoId\":1,  \r\n            \"quantidade\":1   \r\n        },\r\n        {        \r\n            \"produtoId\":2,  \r\n            \"quantidade\":3   \r\n        }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/pedido/solicitar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pedido",
+								"solicitar"
+							]
+						},
+						"description": "Endpoint responsavel pelo envio de pedidos, podendo ser lançado mais de um item na mesma requisição."
+					},
+					"response": []
+				},
+				{
+					"name": "consultar pedidos finalizados",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0ZTJAdGVzdGUuY29tIiwiaWF0IjoxNjIwNTIzNDk4LCJleHAiOjE2MjA1MjQwOTh9.UPPxOciEDrm66D7M_OLdLIJagQ4cyUfh8o3Mq-1Ndb0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/pedido/finalizados",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pedido",
+								"finalizados"
+							]
+						},
+						"description": "Endpoint responsavel por consultar pedidos finalizados."
+					},
+					"response": []
+				},
+				{
+					"name": "consultar status do pedido",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/pedido/status/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pedido",
+								"status",
+								"1"
+							]
+						},
+						"description": "Endpoint responsavel por consultar o status atual do pedido."
+					},
+					"response": []
+				},
+				{
+					"name": "atualizar status pedido",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0ZTJAdGVzdGUuY29tIiwiaWF0IjoxNjIwNTIzNDk4LCJleHAiOjE2MjA1MjQwOTh9.UPPxOciEDrm66D7M_OLdLIJagQ4cyUfh8o3Mq-1Ndb0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"status\": \"CANCELADO\"  \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/pedido/atualizarStatus/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pedido",
+								"atualizarStatus",
+								"1"
+							]
+						},
+						"description": "Endpoint responsavel por atualizar o status do pedido, para clientes somente habilitado o cancelamento."
+					},
+					"response": []
+				},
+				{
+					"name": "Cancelar pedido pelo cliente",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0ZUByZXN0YXVyYW50ZS5jb20iLCJpYXQiOjE2MjA2MDE5MDAsImV4cCI6MTYyMDYwMjUwMH0.Nkata2SRb87rIt-2_Edf8Vx4yPdZbglCXlTQ0XwLbuI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/pedido/cancelarPedido/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pedido",
+								"cancelarPedido",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"teste@restaurante.com\",  \r\n    \"senha\":123\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				},
+				"description": "Endpoint de autenticaçao, necessario para acesso aos endpoints fechados; Retorna um token jwt que deve ser inserido no header das requisiçoes, com a etiqueta 'Authorization'."
+			},
+			"response": []
+		}
+	]
+}
