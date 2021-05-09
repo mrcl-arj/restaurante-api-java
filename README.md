@@ -10,7 +10,6 @@
  - PostgreSql 12
 
 ### Funcionalidades:
-
 - [x] Cadastro de gestor
 - [x] Cadastro de cliente
 - [x] Cadastro de produtos
@@ -20,6 +19,9 @@
  - mvn clean install
  - mvn spring-boot:run
  - atualize o arquivo application.properties com suas informaçoes do banco de dados
+
+### Documentação
+ - O projeto conta com uma collection Postman incluindo descrição e exemplos de uso dos endpoints.
 
 ### Versão Online
  - https://restaurante-api-teste.herokuapp.com/
